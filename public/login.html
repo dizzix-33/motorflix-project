@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - StreamClone</title>
+    <style> body{background:#141414; color:white; display:flex; justify-content:center; align-items:center;
+height:100vh;} .form-box{background:#333; padding:2rem; border-radius:8px; width:350px;} input{width:90%;
+padding:10px; margin-bottom:10px;}</style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Sign In</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="handleLogin()" style="width:100%; padding:10px; background:#e50914; border:none;
+color:white;">Login</button>
+        <p><a href="/register.html">New here? Sign up.</a></p>
+    </div>
+
+    <script>
+        async function handleLogin() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, pass })
+            });
+
+            if(res.ok) {
+                // Redirect to Home
+                window.location.href = '/index.html';
+            } else {
+                alert("Invalid credentials");
+            }
+        }
+    </script>
+</body>
+</html>
+```

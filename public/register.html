@@ -1,0 +1,42 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - StreamClone</title>
+    <style> body{background:#141414; color:white; display:flex; justify-content:center; align-items:center;
+height:100vh;} .form-box{background:#333; padding:2rem; border-radius:8px; width:350px;} input{width:90%;
+padding:10px; margin-bottom:10px;}</style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Create Account</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="handleRegister()" style="width:100%; padding:10px; background:#e50914; border:none;
+color:white;">Sign Up</button>
+        <p><a href="/login.html">Already have an account?</a></p>
+    </div>
+
+    <script>
+        async function handleRegister() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, pass })
+            });
+
+            if(res.ok) {
+                alert("Account created! You can now log in.");
+                window.location.href = '/login.html';
+            } else {
+                alert("Error creating account");
+            }
+        }
+    </script>
+</body>
+</html>
+```
