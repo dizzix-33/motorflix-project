@@ -110,4 +110,4 @@ module.exports = app;
 
 Create a file named **`.env`** in the same folder:
 ```
-MONGO_URI=mongodb+srv://dphkum305_db_user:YlPiavnDHmWIyHHd@cluster0.pjywxzr.mongodb.net/motorflix
+MONGO_URI=mongodb+srv://dphkum305_db_user:YlPiavnDHmWIyHHd@cluster0.pjywxzr.mongodb.net/
