@@ -11,11 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB Connection (Using Environment Variable for security)
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log("DB Connected"))
-.catch((err) => console.error(err));
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("DB Connected"))
+    .catch((err) => console.error("MongoDB connection failed:", err));
 
 // User Model
 const userSchema = new mongoose.Schema({
@@ -99,14 +97,17 @@ app.post('/api/history', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3000; // Use port provided by Vercel
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT = process.env.PORT || 3000;
+
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
 ```
 
 Create a file named **`.env`** in the same folder:
 ```
-MONGO_URI="YOUR_MONGODB_CLUSTER_STRING_HERE"
-```
-*Paste your connection string from Step 1 into `MONGO_URI`, making sure to wrap it in quotes.*
-
----
+MONGO_URI=mongodb+srv://dphkum305_db_user:<YlPiavnDHmWIyHHd>@cluster0.pjywxzr.mongodb.net/motorflix
